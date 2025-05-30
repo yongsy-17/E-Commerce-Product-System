@@ -20,9 +20,6 @@ export class Order {
 
     }
 
-    getTotalPrice(): number {
-    let itemsTotal = this.orderItem.reduce((total, item) => total + item.getTotalPrice(), 0);
-    return itemsTotal + this.dileveryOption.fee;
-  }
+   
 
 }
