@@ -1,11 +1,11 @@
 export class Product {
-    private Id :number;
-    private productName: string;
-    private category :string;
-    private price :number;
-    private stockQuantity : number;
-    private discount :number = 0;
-    private sellerId : number;
+    public Id :number;
+    public productName: string;
+    public category :string;
+    public price :number;
+    public stockQuantity : number;
+    public discount :number = 0;
+    public sellerId : number;
 
     constructor (
         Id: number,
@@ -23,6 +23,10 @@ export class Product {
         this.stockQuantity = stockQuantity,
         this.discount = discount,
         this.sellerId  = sellerId
+    }
+
+    getproduct():void{
+        return
     }
 
     getDiscountedPrice(): void{
