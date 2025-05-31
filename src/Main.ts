@@ -1,5 +1,5 @@
 import { Product } from "./Product/Product";
-import { OrderItem } from "./Shopping/OrderItem";
+import { OrderItem } from "./Shopping/Orderitem";
 import { Order } from "./Shopping/Order";
 import { Shipment } from "./Deliver/Shipment";
 import { DeliveryOption } from "./Deliver/DeliveryOption";
