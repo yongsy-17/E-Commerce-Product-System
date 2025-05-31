@@ -6,7 +6,8 @@
       "strict": true,               // Enable all strict type-checking options
       "esModuleInterop": true,      // Allow default import from CommonJS modules
       "outDir": "dist",           // Where compiled JS files go
-      "rootDir": "src"            // Where your TypeScript files are
+      "rootDir": "src",
+      "forceConsistentCasingInFileNames": false            // Where your TypeScript files are
     },
     "include": ["src/**/*", "src/Person"],        // Include all .ts files in the src folder
     "exclude": ["node_modules"]     // Don't compile node_modules
