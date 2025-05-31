@@ -1,7 +1,9 @@
+import { Categories } from "./Categories";
+
 export class Product {
     public Id :number;
     public productName: string;
-    public category :string;
+    public category :Categories;
     public price :number;
     public stockQuantity : number;
     public discount :number = 0;
@@ -10,7 +12,7 @@ export class Product {
     constructor (
         Id: number,
         productName: string,
-        category: string,
+        category: Categories,
         price: number,
         stockQuantity: number,
         discount: number,
