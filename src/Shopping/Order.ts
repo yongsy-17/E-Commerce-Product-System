@@ -1,4 +1,4 @@
-import { OrderItem } from "./OrderItem";
+import { OrderItem } from "./Orderitem";
 import { DeliveryOption } from "../Deliver/DeliveryOption";
 
 export class Order {

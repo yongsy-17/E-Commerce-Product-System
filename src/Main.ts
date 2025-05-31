@@ -8,7 +8,7 @@ import { DeliveryType } from "./Deliver/DeliveryType";
 
 // Setup
 const expressOption = new DeliveryOption(DeliveryType.EXPRESS, 10);
-const shipment1 = new Shipment("370 street", "Phnom Penh", expressOption);
+const shipment1 = new Shipment("TRK123456", "Phnom Penh", expressOption);
 
 const manager = new DeliveryManager(1, "Sokha");
 const details = manager.getShipmentDetails(shipment1);
@@ -40,4 +40,3 @@ myOrder['orderItems'].forEach((item, index) => {
 
 console.log(`Delivery Fee: $${myOrder['deliveryOption'].cost.toFixed(2)}`);
 console.log(`Total Price: $${myOrder.getTotalPrice().toFixed(2)}`);
-
