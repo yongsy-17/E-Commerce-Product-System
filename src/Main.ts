@@ -6,10 +6,11 @@ import { DeliveryOption } from "./Deliver/DeliveryOption";
 import { DeliveryManager } from "./Deliver/DeliveryManager";
 import { DeliveryType } from "./Deliver/DeliveryType";
 import { Categories } from "./Product/Categories";
+import { Seller } from "./Person/Seller";
 
-// Setup
+// check delivery option
 const expressOption = new DeliveryOption(DeliveryType.EXPRESS, 10);
-const shipment1 = new Shipment("TRK123456", "Phnom Penh", expressOption);
+const shipment1 = new Shipment("370 street", "Phnom Penh", expressOption);
 
 const manager = new DeliveryManager(1, "Sokha");
 const details = manager.getShipmentDetails(shipment1);
@@ -41,3 +42,30 @@ myOrder['orderItems'].forEach((item, index) => {
 
 console.log(`Delivery Fee: $${myOrder['deliveryOption'].cost.toFixed(2)}`);
 console.log(`Total Price: $${myOrder.getTotalPrice().toFixed(2)}`);
+//admin check stock
+
+// Create delivery option
+const expressDelivery = new DeliveryOption(DeliveryType.EXPRESS, 5);
+
+// Create seller
+const seller = new Seller(1, "Sokha", 30, "1001",expressDelivery);
+
+// Create products with correct constructor arguments
+const product1 = new Product(1, "T-Shirt", Categories.CLOSTHING, 19.99, 10, 0, 1001);
+const product2 = new Product(2, "USB Cable", Categories.ELECTRONICE, 9.99, 20, 5, 1001);
+const product3 = new Product(3, "Laptop Stand", Categories.ELECTRONICE, 29.99, 5, 10, 1001);
+
+// Add products to seller
+seller.addProduct(product1);
+seller.addProduct(product2);
+seller.addProduct(product3);
+
+// Display all products
+console.log("Product List:");
+seller.getProductList().forEach((p, index) => {
+    console.log(`#${index + 1}: ${p.productName} - ${p.stockQuantity} in stock`);
+});
+
+// Show total stock
+console.log(`Total stock for ${seller.getName()}: ${seller.getTotalStock()} items`);
+
