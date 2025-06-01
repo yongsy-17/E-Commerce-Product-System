@@ -9,9 +9,9 @@ import { Categories } from "./Product/Categories";
 import { Seller } from "./Person/Seller";
 import { Review } from "./Person/Review";
 
-// Setup
+// check delivery option
 const expressOption = new DeliveryOption(DeliveryType.EXPRESS, 10);
-const shipment1 = new Shipment("TRK123456", "Phnom Penh", expressOption);
+const shipment1 = new Shipment("370 street", "Phnom Penh", expressOption);
 
 const manager = new DeliveryManager(1, "Sokha");
 const details = manager.getShipmentDetails(shipment1);
@@ -81,4 +81,4 @@ myOrder['orderItems'].forEach((item, index) => {
 console.log(`Delivery Fee: $${myOrder['deliveryOption'].cost.toFixed(2)}`);
 console.log(`Total Price: $${myOrder.getTotalPrice().toFixed(2)}`);
 console.log(`Orders with products from ${seller1.name}:`, ordersWithMyProducts);
-console.log(review1.getSummary()); // Output: Alice rated 5/5: "Excellent product!"
+console.log(review1.getSummary()); 
