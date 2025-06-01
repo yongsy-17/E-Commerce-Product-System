@@ -33,6 +33,8 @@ const myOrderForSeller = new Order(1, [item7, item5], "ABA", expressOption);
 const seller1 = new Seller(1, "Seller Pany1");
 const seller2 = new Seller(2, "Seller Pany2");
 
+const review1 = new Review("Alice", 5, "Excellent product!", 1);
+
 
 
 // Example: Creating multiple OrderItems and using them in an order
@@ -48,7 +50,6 @@ const seller3 = new Review("Seller Pany3", 5, "Great service!", 1);
 
 // Example: Find all orders that include products from seller1
 const ordersWithMyProducts = seller1.getOrdersWithMyProducts([myOrderForSeller]);
-console.log(`Orders with products from ${seller1.name}:`, ordersWithMyProducts);
 
 // ...existing code...
 
@@ -65,17 +66,19 @@ console.log(details);
 // User stories 1 =======
 console.log("Items:");
 myOrder['orderItems'].forEach((item, index) => {
-  const product = item.getProduct();
-  const quantity = item.getQuantity();
-  const pricePerItem = product.price;
-  const discount = product.discount;
-  const discountedPrice = pricePerItem * (1 - discount / 100);
-  const totalItemPrice = discountedPrice * quantity;
-
-  console.log(
-    `#${index + 1}: ${product.productName} x${quantity} - $${discountedPrice.toFixed(2)}  (Discount: ${discount}%) = $${totalItemPrice.toFixed(2)}`
-  );
+    const product = item.getProduct();
+    const quantity = item.getQuantity();
+    const pricePerItem = product.price;
+    const discount = product.discount;
+    const discountedPrice = pricePerItem * (1 - discount / 100);
+    const totalItemPrice = discountedPrice * quantity;
+    
+    console.log(
+        `#${index + 1}: ${product.productName} x${quantity} - $${discountedPrice.toFixed(2)}  (Discount: ${discount}%) = $${totalItemPrice.toFixed(2)}`
+    );
 });
 
 console.log(`Delivery Fee: $${myOrder['deliveryOption'].cost.toFixed(2)}`);
 console.log(`Total Price: $${myOrder.getTotalPrice().toFixed(2)}`);
+console.log(`Orders with products from ${seller1.name}:`, ordersWithMyProducts);
+console.log(review1.getSummary()); // Output: Alice rated 5/5: "Excellent product!"
