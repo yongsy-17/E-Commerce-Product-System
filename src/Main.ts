@@ -6,6 +6,8 @@ import { DeliveryOption } from "./Deliver/DeliveryOption";
 import { DeliveryManager } from "./Deliver/DeliveryManager";
 import { DeliveryType } from "./Deliver/DeliveryType";
 import { Categories } from "./Product/Categories";
+import { Seller } from "./Person/Seller";
+import { Review } from "./Person/Review";
 
 // Setup
 const expressOption = new DeliveryOption(DeliveryType.EXPRESS, 10);
@@ -17,10 +19,46 @@ const details = manager.getShipmentDetails(shipment1);
 const tshirt = new Product(1,"T-shert",Categories.CLOSTHING, 5, 2, 20, 1);
 const cable = new Product(2, "USB Cable",Categories.ELECTRONICE, 3, 1, 15, 1);
 
+
+
+
+
+// ...existing code...
+
+const item7 = new OrderItem(1, "EXPRESS", 2, tshirt);
+const item5 = new OrderItem(1, "EXPRESS", 2, cable);
+
+const myOrderForSeller = new Order(1, [item7, item5], "ABA", expressOption);
+
+const seller1 = new Seller(1, "Seller Pany1");
+const seller2 = new Seller(2, "Seller Pany2");
+
+
+
+// Example: Creating multiple OrderItems and using them in an order
+
+
+
+const orderItems: OrderItem[] = [item7, item5];
+
+// Now you can use orderItems in an Order
+const myOrder = new Order(1, orderItems, "PAID", expressOption);
+
+const seller3 = new Review("Seller Pany3", 5, "Great service!", 1);
+
+// Example: Find all orders that include products from seller1
+const ordersWithMyProducts = seller1.getOrdersWithMyProducts([myOrderForSeller]);
+console.log(`Orders with products from ${seller1.name}:`, ordersWithMyProducts);
+
+// ...existing code...
+
+
+
+
 const item1 = new OrderItem(1, "EXPRESS", 2, tshirt);
 const item2 = new OrderItem(1, "EXPRESS", 2, cable);
 
-const myOrder = new Order(1, [item1, item2], "PAID", expressOption);
+const mySecondOrder = new Order(1, [item1, item2], "PAID", expressOption);
 
 // Output
 console.log(details);
