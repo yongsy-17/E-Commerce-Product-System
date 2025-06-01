@@ -14,8 +14,8 @@ const shipment1 = new Shipment("TRK123456", "Phnom Penh", expressOption);
 const manager = new DeliveryManager(1, "Sokha");
 const details = manager.getShipmentDetails(shipment1);
 
-const tshirt = new Product(1,"T-shert",Categories.CLOSTHING, 5, 2, 20, 1);
-const cable = new Product(2, "USB Cable",Categories.ELECTRONICE, 3, 1, 15, 1);
+const tshirt = new Product(1,"T-shert",Categories.CLOSTHING, 5, 2, 20, 1,);
+const cable = new Product(2, "USB Cable",Categories.ELECTRONICE, 3, 1, 15, 1,);
 
 const item1 = new OrderItem(1, "EXPRESS", 2, tshirt);
 const item2 = new OrderItem(1, "EXPRESS", 2, cable);
