@@ -6,10 +6,12 @@ import { DeliveryOption } from "./Deliver/DeliveryOption";
 import { DeliveryManager } from "./Deliver/DeliveryManager";
 import { DeliveryType } from "./Deliver/DeliveryType";
 import { Categories } from "./Product/Categories";
+import { Seller } from "./Person/Seller";
+import { Review } from "./Person/Review";
 
-// Setup
+// check delivery option
 const expressOption = new DeliveryOption(DeliveryType.EXPRESS, 10);
-const shipment1 = new Shipment("TRK123456", "Phnom Penh", expressOption);
+const shipment1 = new Shipment("370 street", "Phnom Penh", expressOption);
 
 const manager = new DeliveryManager(1, "Sokha");
 const details = manager.getShipmentDetails(shipment1);
@@ -17,27 +19,66 @@ const details = manager.getShipmentDetails(shipment1);
 const tshirt = new Product(1,"T-shert",Categories.CLOSTHING, 5, 2, 20, 1,);
 const cable = new Product(2, "USB Cable",Categories.ELECTRONICE, 3, 1, 15, 1,);
 
+
+
+
+
+// ...existing code...
+
+const item7 = new OrderItem(1, "EXPRESS", 2, tshirt);
+const item5 = new OrderItem(1, "EXPRESS", 2, cable);
+
+const myOrderForSeller = new Order(1, [item7, item5], "ABA", expressOption);
+
+const seller1 = new Seller(1, "Seller Pany1");
+const seller2 = new Seller(2, "Seller Pany2");
+
+const review1 = new Review("Alice", 5, "Excellent product!", 1);
+
+
+
+// Example: Creating multiple OrderItems and using them in an order
+
+
+
+const orderItems: OrderItem[] = [item7, item5];
+
+// Now you can use orderItems in an Order
+const myOrder = new Order(1, orderItems, "PAID", expressOption);
+
+const seller3 = new Review("Seller Pany3", 5, "Great service!", 1);
+
+// Example: Find all orders that include products from seller1
+const ordersWithMyProducts = seller1.getOrdersWithMyProducts([myOrderForSeller]);
+
+// ...existing code...
+
+
+
+
 const item1 = new OrderItem(1, "EXPRESS", 2, tshirt);
 const item2 = new OrderItem(1, "EXPRESS", 2, cable);
 
-const myOrder = new Order(1, [item1, item2], "PAID", expressOption);
+const mySecondOrder = new Order(1, [item1, item2], "PAID", expressOption);
 
 // Output
 console.log(details);
 // User stories 1 =======
 console.log("Items:");
 myOrder['orderItems'].forEach((item, index) => {
-  const product = item.getProduct();
-  const quantity = item.getQuantity();
-  const pricePerItem = product.price;
-  const discount = product.discount;
-  const discountedPrice = pricePerItem * (1 - discount / 100);
-  const totalItemPrice = discountedPrice * quantity;
-
-  console.log(
-    `#${index + 1}: ${product.productName} x${quantity} - $${discountedPrice.toFixed(2)}  (Discount: ${discount}%) = $${totalItemPrice.toFixed(2)}`
-  );
+    const product = item.getProduct();
+    const quantity = item.getQuantity();
+    const pricePerItem = product.price;
+    const discount = product.discount;
+    const discountedPrice = pricePerItem * (1 - discount / 100);
+    const totalItemPrice = discountedPrice * quantity;
+    
+    console.log(
+        `#${index + 1}: ${product.productName} x${quantity} - $${discountedPrice.toFixed(2)}  (Discount: ${discount}%) = $${totalItemPrice.toFixed(2)}`
+    );
 });
 
 console.log(`Delivery Fee: $${myOrder['deliveryOption'].cost.toFixed(2)}`);
 console.log(`Total Price: $${myOrder.getTotalPrice().toFixed(2)}`);
+console.log(`Orders with products from ${seller1.name}:`, ordersWithMyProducts);
+console.log(review1.getSummary()); 

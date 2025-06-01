@@ -1,39 +1,26 @@
 import { Categories } from "./Categories";
 
 export class Product {
-    public Id :number;
-    public productName: string;
-    public category :Categories;
-    public price :number;
-    public stockQuantity : number;
-    public discount :number = 0;
-    public sellerId : number;
+    constructor(
+        public Id: number,
+        public productName: string,
+        public category: Categories,
+        public price: number,
+        public stockQuantity: number,
+        public discount: number = 0,
+        public sellerId: number
+    ) {}
 
-    constructor (
-        Id: number,
-        productName: string,
-        category: Categories,
-        price: number,
-        stockQuantity: number,
-        discount: number,
-        sellerId :number,
-    ){
-        this.Id = Id,
-        this.productName = productName,
-        this.category = category,
-        this.price = price,
-        this.stockQuantity = stockQuantity,
-        this.discount = discount,
-        this.sellerId  = sellerId
+    // Returns a summary of the product
+   getProduct(): string {
+        return `${this.productName} - $${this.price} (${this.stockQuantity} in stock, ${this.discount}% off)`;
     }
 
-    getproduct():void{
-        return
+    getDiscountedPrice(): number {
+        return this.price * (1 - this.discount / 100);
     }
 
-    getDiscountedPrice(): void{
-
+    getInStock(): boolean {
+        return this.stockQuantity > 0;
     }
-    getInStock():void{}
-
 }
