@@ -1,4 +1,5 @@
 import { Product } from "../Product/Product";
+
 export class OrderItem {
   private quantity: number;
   private deliveryOpt: string;
@@ -28,5 +29,10 @@ export class OrderItem {
   getTotalPrice(): number {
     const discountedPrice = this.product.price * (1 - this.product.discount / 100);
     return discountedPrice * this.quantity;
+  }
+
+  // New method to show product name and stock quantity
+  getProductStockInfo(): string {
+    return `${this.product.productName} - ${this.product.stockQuantity} in stock`;
   }
 }
