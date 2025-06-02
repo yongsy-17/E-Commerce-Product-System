@@ -21,7 +21,5 @@ export class Customer {
     return this.name;
   }
 
-  submitReview( productId: string, rating: number, comment: string): Review {
-    return reviewSystem.submitReview(this.customerId, productId, rating, comment);
-  }
+ 
 }

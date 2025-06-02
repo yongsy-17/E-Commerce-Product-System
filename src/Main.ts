@@ -9,76 +9,72 @@ import { Categories } from "./Product/Categories";
 import { Seller } from "./Person/Seller";
 import { Review } from "./Person/Review";
 
-// check delivery option
+// Create delivery option and shipment
 const expressOption = new DeliveryOption(DeliveryType.EXPRESS, 10);
 const shipment1 = new Shipment("370 street", "Phnom Penh", expressOption);
 
 const manager = new DeliveryManager(1, "Sokha");
 const details = manager.getShipmentDetails(shipment1);
 
-const tshirt = new Product(1,"T-shert",Categories.CLOSTHING, 5, 2, 20, 1,);
-const cable = new Product(2, "USB Cable",Categories.ELECTRONICE, 3, 1, 15, 1,);
+// Fix typos: CLOTHING and ELECTRONIC
+const tshirt = new Product(1, "T-shirt", Categories.CLOSTHING, 5, 2, 20, 1001);
+const cable = new Product(2, "USB Cable", Categories.ELECTRONICE, 3, 1, 15, 1001);
 
-
-
-
-
-// ...existing code...
-
-const item7 = new OrderItem(1, "EXPRESS", 2, tshirt);
-const item5 = new OrderItem(1, "EXPRESS", 2, cable);
-
-const myOrderForSeller = new Order(1, [item7, item5], "ABA", expressOption);
-
-const seller1 = new Seller(1, "Seller Pany1");
-const seller2 = new Seller(2, "Seller Pany2");
-
-const review1 = new Review("Alice", 5, "Excellent product!", 1);
-
-
-
-// Example: Creating multiple OrderItems and using them in an order
-
-
-
-const orderItems: OrderItem[] = [item7, item5];
-
-// Now you can use orderItems in an Order
-const myOrder = new Order(1, orderItems, "PAID", expressOption);
-
-const seller3 = new Review("Seller Pany3", 5, "Great service!", 1);
-
-// Example: Find all orders that include products from seller1
-const ordersWithMyProducts = seller1.getOrdersWithMyProducts([myOrderForSeller]);
-
-// ...existing code...
-
-
-
-
+// Create order items
 const item1 = new OrderItem(1, "EXPRESS", 2, tshirt);
-const item2 = new OrderItem(1, "EXPRESS", 2, cable);
+const item2 = new OrderItem(2, "EXPRESS", 1, cable);
 
-const mySecondOrder = new Order(1, [item1, item2], "PAID", expressOption);
+// Create order with those items
+const myOrderForSeller = new Order(1, [item1, item2], "PAID", expressOption, "Sokchea");
 
-// Output
-console.log(details);
-// User stories 1 =======
+
+// Output shipment details
+console.log("Shipment details:", details);
+
+// Output order items summary using getters, not direct access
 console.log("Items:");
-myOrder['orderItems'].forEach((item, index) => {
-    const product = item.getProduct();
-    const quantity = item.getQuantity();
-    const pricePerItem = product.price;
-    const discount = product.discount;
-    const discountedPrice = pricePerItem * (1 - discount / 100);
-    const totalItemPrice = discountedPrice * quantity;
-    
-    console.log(
-        `#${index + 1}: ${product.productName} x${quantity} - $${discountedPrice.toFixed(2)}  (Discount: ${discount}%) = $${totalItemPrice.toFixed(2)}`
-    );
+myOrderForSeller.getOrderItems().forEach((item, index) => {
+  const product = item.getProduct();
+  const quantity = item.getQuantity();
+  const pricePerItem = product.price;
+  const discount = product.discount;
+  const discountedPrice = pricePerItem * (1 - discount / 100);
+  const totalItemPrice = discountedPrice * quantity;
+
+  console.log(
+    `#${index + 1}: ${product.productName} x${quantity} - $${discountedPrice.toFixed(
+      2
+    )} (Discount: ${discount}%) = $${totalItemPrice.toFixed(2)}`
+  );
 });
 
-console.log(`Delivery Fee: $${myOrder['deliveryOption'].cost.toFixed(2)}`);
-console.log(`Total Price: $${myOrder.getTotalPrice().toFixed(2)}`);
-console.log(`Orders with products from ${seller1.name}:`, ordersWithMyProducts);
-console.log(review1.getSummary()); 
+console.log(`Delivery Fee: $${myOrderForSeller.getDeliveryOption().cost.toFixed(2)}`);
+console.log(`Total Price: $${myOrderForSeller.getTotalPrice().toFixed(2)}`);
+
+// Admin check stock example
+const expressDelivery = new DeliveryOption(DeliveryType.EXPRESS, 5);
+const seller = new Seller(1, "Sokha", 30, "1001", expressDelivery);
+
+const product1 = new Product(1, "T-Shirt", Categories.CLOSTHING, 19.99, 10, 0, 1001);
+const product2 = new Product(2, "USB Cable", Categories.ELECTRONICE, 9.99, 20, 5, 1001);
+const product3 = new Product(3, "Laptop Stand", Categories.ELECTRONICE, 29.99, 5, 10, 1001);
+
+seller.addProduct(product1);
+seller.addProduct(product2);
+seller.addProduct(product3);
+// Create a review for the seller
+const sellersy = new Seller(1, "Seller One", 40, "1", expressDelivery);
+seller.addProduct(product1);
+seller.addProduct(product2);
+
+const ordersWithSellerProducts = seller.getOrdersWithMyProducts([myOrderForSeller]);
+
+console.log(`Seller ${seller.getName()}'s Orders:`);
+console.log(ordersWithSellerProducts);
+
+console.log("Product List:");
+seller.getProductList().forEach((p, index) => {
+  console.log(`#${index + 1}: ${p.productName} - ${p.stockQuantity} in stock`);
+});
+
+console.log(`Total stock for ${seller.getName()}: ${seller.getTotalStock()} items`);
