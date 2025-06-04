@@ -1,3 +1,4 @@
+import { DeliveryOption } from "../Deliver/DeliveryOption";
 import { Product } from "../Product/Product";
 
 export class OrderItem {
@@ -20,22 +21,29 @@ export class OrderItem {
     this.shipmentId = shipmentId;
     this.product = product;
   }
+  public getdeliveryOpt():string{
+    return this.deliveryOpt;
+  }
 
-  getQuantity(): number {
+  public getShipmentId():number{
+    return this.shipmentId
+  }
+
+  public getQuantity(): number {
     return this.quantity;
   }
 
-  getProduct(): Product {
+  public getProduct(): Product {
     return this.product;
   }
 
-  getTotalPrice(): number {
+  public getTotalPrice(): number {
     const discountedPrice = this.product.price * (1 - this.product.discount / 100);
     return discountedPrice * this.quantity;
   }
 
   // New method to show product name and stock quantity
-  getProductStockInfo(): string {
+  public getProductStockInfo(): string {
     return `${this.product.productName} - ${this.product.stockQuantity} in stock`;
   }
 }
