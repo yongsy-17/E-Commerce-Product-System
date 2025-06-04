@@ -1,25 +1,25 @@
-import { Review } from "./Review";
+// import { Review } from "./Review";
 
-export class Customer {
-  private customerId: string;
-  private name: string;
+// export class Customer {
+//   private customerId: string;
+//   private name: string;
 
-  constructor(customerId: string, name: string) {
-    if (!customerId || !name.trim()) {
-      throw new Error("Customer ID and name must not be empty");
-    }
-    this.customerId = customerId;
-    this.name = name.trim();
-  }
+//   constructor(customerId: string, name: string) {
+//     if (!customerId || !name.trim()) {
+//       throw new Error("Customer ID and name must not be empty");
+//     }
+//     this.customerId = customerId;
+//     this.name = name.trim();
+//   }
 
-  // Getter methods
-  getCustomerId(): string {
-    return this.customerId;
-  }
+//   // Getter methods
+//   getCustomerId(): string {
+//     return this.customerId;
+//   }
 
-  getName(): string {
-    return this.name;
-  }
+//   getName(): string {
+//     return this.name;
+//   }
 
  
-}
+// }
