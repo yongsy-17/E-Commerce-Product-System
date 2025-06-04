@@ -67,6 +67,8 @@ const sellersy = new Seller(1, "Seller One", 40, "1", expressDelivery);
 seller.addProduct(product1);
 seller.addProduct(product2);
 
+
+
 const ordersWithSellerProducts = seller.getOrdersWithMyProducts([myOrderForSeller]);
 
 console.log(`Seller ${seller.getName()}'s Orders:`);
@@ -78,3 +80,26 @@ seller.getProductList().forEach((p, index) => {
 });
 
 console.log(`Total stock for ${seller.getName()}: ${seller.getTotalStock()} items`);
+
+
+// Create order items and assign IDs for demonstration
+const orderItem1 = new OrderItem(1, "EXPRESS", 2, tshirt) as any;
+orderItem1.id = 1;
+const orderItem2 = new OrderItem(1, "EXPRESS", 2, cable) as any;
+orderItem2.id = 2;
+
+// Create an order with these items
+const myOrder = new Order(123, [orderItem1, orderItem2], "PAID", expressOption, "John Doe");
+  console.log("       ");
+  console.log("List of order items after cancellation:");
+
+console.log("Initial total order price: $" + myOrder.getTotalPrice().toFixed(2));
+
+// Cancel order item with ID 1 (T-shirt)
+const refundAmount = myOrder.cancelOrderItem(1);
+if (refundAmount !== null) {
+  console.log(`Order item canceled. Refund amount: $${refundAmount.toFixed(2)}`);
+  console.log(`Updated total order price: $${myOrder.getTotalPrice().toFixed(2)}`);
+} else {
+  console.log("Item not found in the order.");
+}

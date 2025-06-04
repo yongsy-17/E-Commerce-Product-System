@@ -1,6 +1,9 @@
 import { Product } from "../Product/Product";
 
 export class OrderItem {
+  getId() {
+      throw new Error("Method not implemented.");
+  }
   private quantity: number;
   private deliveryOpt: string;
   private shipmentId: number;

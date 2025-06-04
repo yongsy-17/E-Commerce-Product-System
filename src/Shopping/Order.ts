@@ -35,4 +35,16 @@ export class Order {
   getDeliveryOption(): DeliveryOption {
     return this.deliveryOption;
   }
+  cancelOrderItem(itemId: number): number | null {
+    const itemIndex = this.items.findIndex(item => {
+      return (item as any).id === itemId;
+    }); 
+    if (itemIndex !== -1) {
+      const canceledItem = this.items[itemIndex];
+      this.items.splice(itemIndex, 1); 
+      return canceledItem.getTotalPrice(); 
+    }
+    
+    return null; 
+  }
 }
