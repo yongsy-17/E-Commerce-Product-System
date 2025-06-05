@@ -4,4 +4,7 @@ export class DeliveryOption {
     public type: DeliveryType,
     public cost: number 
   ) {}
+  getname(){
+    
+  }
 }

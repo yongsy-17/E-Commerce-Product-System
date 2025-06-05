@@ -46,4 +46,5 @@ export class OrderItem {
   public getProductStockInfo(): string {
     return `${this.product.productName} - ${this.product.stockQuantity} in stock`;
   }
+  
 }
