@@ -7,4 +7,10 @@ export class Person {
   public getName(): string {
         return this.name;
     }
+  getId():number{
+    return this.id
+  }
+  getAge():number{
+    return this.age
+  }
 }

@@ -23,4 +23,5 @@ export class Product {
     getInStock(): boolean {
         return this.stockQuantity > 0;
     }
+   
 }

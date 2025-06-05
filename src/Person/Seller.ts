@@ -64,4 +64,15 @@ export class Seller extends Person {
     getTotalStock(): number {
         return this.products.reduce((total, product) => total + product.stockQuantity, 0);
     }
+    updateProductStock(productId: string, newStock: number): void {
+    const product = this.products.find(p => p.id === Number(productId));
+
+    if (product) {
+      product.stockQuantity = newStock;
+      console.log(`Stock updated for ${product.productName}: ${newStock}`);
+    } else {
+      console.log("Product not found.");
+    }
+  }
+
 }

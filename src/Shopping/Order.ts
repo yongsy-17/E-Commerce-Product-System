@@ -35,4 +35,6 @@ export class Order {
   getDeliveryOption(): DeliveryOption {
     return this.deliveryOption;
   }
+  
+
 }
