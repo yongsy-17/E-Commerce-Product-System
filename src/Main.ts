@@ -26,6 +26,7 @@ const details = manager.getShipmentDetails(shipment1);
 const tshirt = new Product(1, "T-shirt", Categories.CLOSTHING, 5, 2, 20, 1001,[]);
 const cable = new Product(2, "USB Cable", Categories.ELECTRONICE, 3, 1, 15, 1001,[]);
 
+
 // Create order items (individual product orders)
 // Purpose: Encapsulate a product with quantity and delivery type
 // Params:
@@ -83,10 +84,10 @@ seller.addProduct(product2);
 seller.addProduct(product3);
 
 // Get orders containing seller’s products
-const ordersWithSellerProducts = seller.getOrdersWithMyProducts([myOrderForSeller]);
+// const ordersWithSellerProducts = seller.getOrdersWithMyProducts([myOrderForSeller]);
 
-console.log(`Seller ${seller.getName()}'s Orders:`);
-console.log(ordersWithSellerProducts);
+// console.log(`Seller ${seller.getName()}'s Orders:`);
+// console.log(ordersWithSellerProducts);
 
 console.log("Product List:");
 seller.getProductList().forEach((p, index) => {
@@ -115,3 +116,28 @@ function demonstrateReviewSystem(): void {
 }
 //user stroy 6======
   demonstrateReviewSystem();
+
+// user story 2
+const sokhaOrders = seller.getOrdersWithMyProducts([myOrderForSeller]);
+
+const formattedOrders = sokhaOrders.map(order => ({
+  id: order.getId(),
+  items: order.getOrderItems().map(item => ({
+    product: {
+      id: item.getProduct().id,
+      name: item.getProduct().productName,
+      price: item.getProduct().price
+    },
+    quantity: item.getQuantity()
+  })),
+  paymentStatus: order.getPaymentStatus(),
+  deliveryOption: {
+    type: order.getDeliveryOption().getType(),
+    cost: order.getDeliveryOption().getCost()
+  },
+  buyerName: order.getBuyerName()
+}));
+
+console.log(`Seller ${seller.getName()}'s Orders:`);
+console.log(JSON.stringify(formattedOrders, null, 2));
+
