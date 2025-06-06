@@ -15,6 +15,7 @@ import { Review } from "./Person/Review";
 // Create products
 const tshirt = new Product(1, "T-shirt", Categories.CLOSTHING, 5, 2, 20, 1001, []);
 const cable = new Product(2, "USB Cable", Categories.ELECTRONICE, 3, 1, 15, 1001, []);
+console.log(tshirt,cable)
 
 // Create delivery option
 const expressOption = new DeliveryOption(DeliveryType.EXPRESS, 10);
@@ -43,9 +44,9 @@ myOrderForSeller.getOrderItems().forEach((item, index) => {
 });
 console.log(`Delivery Fee: $${myOrderForSeller.getDeliveryOption().cost.toFixed(2)}`);
 console.log(`Total Price: $${myOrderForSeller.getTotalPrice().toFixed(2)}`);
-//end user story 1
+// end user story 1
 
-//user story 2
+// user story 2
 
 // Create seller
 const expressDelivery = new DeliveryOption(DeliveryType.EXPRESS, 5);
@@ -122,7 +123,7 @@ function demonstrateReviewSystem(): void {
   console.log(product.displayProductInfo());
 
 }
-//user stroy 6======
+// user stroy 6======
   demonstrateReviewSystem();
 //user story 7
 // Create a customer cart

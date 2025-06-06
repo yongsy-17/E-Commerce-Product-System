@@ -6,11 +6,7 @@ export class DeliveryOption {
     public cost: number 
   ) {}
 
-  getname(): string {
-    return this.type;
-  }
-
-  getType(): string {
+  getType(): DeliveryType {
     return this.type;
   }
 

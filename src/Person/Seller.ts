@@ -5,7 +5,7 @@ import { Person } from "../Person/Person";
 import { DeliveryOption } from "../Deliver/DeliveryOption";
 import { Product } from "../Product/Product";
 
-// ✅ Seller class extending Person
+// Seller class extending Person
 export class Seller extends Person {
     private products: Product[] = [];
     private deliveryOption: DeliveryOption;
