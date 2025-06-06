@@ -4,13 +4,13 @@ import { Invoice } from "../Payment/Invoice";
 
 export class Order {
   private invoiceList: Invoice[] = [];
+
   constructor(
     private id: number,
     private items: OrderItem[],
     private paymentStatus: string,
     private deliveryOption: DeliveryOption,
     private buyerName: string
-    
   ) {}
 
   getTotalPrice(): number {
@@ -32,19 +32,46 @@ export class Order {
   getBuyerName(): string {
     return this.buyerName;
   }
+
   getPaymentStatus(): string {
     return this.paymentStatus;
   }
+
   getDeliveryOption(): DeliveryOption {
     return this.deliveryOption;
   }
-   addInvoice(invoice: Invoice): void {
+
+  addInvoice(invoice: Invoice): void {
     this.invoiceList.push(invoice);
   }
 
-  // Get all invoices
   getInvoices(): Invoice[] {
     return this.invoiceList;
   }
 
+  // Cancel item by product ID
+  cancelItem(productId: number): number {
+    const index = this.items.findIndex(item => item.getProduct().id === productId);
+
+    if (index === -1) {
+      throw new Error("Product not found in the order.");
+    }
+
+    const item = this.items[index];
+    const product = item.getProduct();
+    const quantity = item.getQuantity();
+
+    // Restore product stock
+    product.stockQuantity += quantity;
+
+    // Calculate refund
+    const price = product.price;
+    const discount = product.discount;
+    const refundAmount = price * (1 - discount / 100) * quantity;
+
+    // Remove the item from the order
+    this.items.splice(index, 1);
+
+    return refundAmount;
+  }
 }

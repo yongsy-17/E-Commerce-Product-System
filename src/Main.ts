@@ -9,8 +9,11 @@ import { Categories } from "./Product/Categories";
 import { Seller } from "./Person/Seller";
 import { ShoppingCart } from "./Shopping/ShoppingCart";
 import { Invoice } from "./Payment/Invoice";
+import { OrderHistory } from "./Shopping/OrderHistory";
+import { Person } from "./Person/Person";
 
 import { Review } from "./Person/Review";
+import { User } from "./Person/User";
 
 
 // Create products
@@ -110,6 +113,19 @@ console.log(`Total stock for ${seller.getName()}: ${seller.getTotalStock()} item
 // Update stock for specific products
 seller.updateProductStock("1", 20);
 seller.updateProductStock("3", 15);
+//user story5
+const user = new User(1, "Yongsy Din", 25);
+user.addOrder(myOrderForSeller);
+
+console.log("Order total before cancellation: $" + myOrderForSeller.getTotalPrice().toFixed(2));
+
+// Cancel the USB Cable item from the order with orderId = 1
+const refundMessage = user.cancelItem(1, 2); // orderId=1, productId=2 (USB Cable)
+console.log(refundMessage);
+
+console.log(myOrderForSeller);
+
+console.log("Order total after cancellation: $" + myOrderForSeller.getTotalPrice().toFixed(2));
 
 // user story 6
 function demonstrateReviewSystem(): void {
@@ -151,3 +167,15 @@ myOrder.getInvoices().forEach(inv => {
   console.log(inv.displayInvoice());
 });
 console.log(myOrder)
+
+
+const itemA = new OrderItem(3, "STANDARD", 1, product3);
+const newOrder = new Order(102, [itemA], "PAID", delivery, "Chantha");
+
+const person = new Person(1, "Yongsy Din", 20); // ✅ Added age
+const history = new OrderHistory(newOrder, person);
+
+// Later update
+const admin = new Person(2, "Admin User", 30); // ✅ Added age
+history.updateHistory(admin);
+console.log(history)
