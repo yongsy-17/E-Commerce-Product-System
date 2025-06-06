@@ -2,6 +2,7 @@ import { OrderItem } from "./Orderitem";
 import { Product } from "../Product/Product";
 import { DeliveryOption } from "../Deliver/DeliveryOption";
 import { Order } from "./Order";
+import { PaymentStatus } from "../Payment/PaymentStatus"; // Assuming this is an enum or constant
 
 /**
  * Represents a shopping cart that holds items before placing an order.
@@ -43,7 +44,15 @@ export class ShoppingCart {
    * @param deliveryOption The selected delivery method
    */
   checkout(deliveryOption: DeliveryOption): Order {
-    const order = new Order(1, this.items, "PAID", deliveryOption, this.owner);
+    const orderId = Math.floor(Math.random() * 10000); // Simulate unique order ID
+    const order = new Order(
+      orderId,
+      this.items,
+      PaymentStatus.PAID,  // Use the enum properly
+      deliveryOption,
+      this.owner
+    );
+
     console.log(`Order placed by ${this.owner}. Payment status: ${order.getPaymentStatus()}`);
     return order;
   }

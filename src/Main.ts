@@ -8,6 +8,7 @@ import { DeliveryStatus, DeliveryType } from "./Deliver/DeliveryType";
 import { Categories } from "./Product/Categories";
 import { Seller } from "./Person/Seller";
 import { ShoppingCart } from "./Shopping/ShoppingCart";
+import { Invoice } from "./Payment/Invoice";
 
 import { Review } from "./Person/Review";
 
@@ -138,3 +139,15 @@ myCart.viewCart();
 // Checkout
 const delivery = new DeliveryOption(DeliveryType.STANDARD, 3.99);
 const myOrder = myCart.checkout(delivery);
+
+const invoice = new Invoice(1, 101); // productId: 101
+myOrder.addInvoice(invoice);
+
+// Update review after delivery
+invoice.updateReview(4, "Great product, fast delivery!");
+
+// Display all invoices
+myOrder.getInvoices().forEach(inv => {
+  console.log(inv.displayInvoice());
+});
+console.log(myOrder)

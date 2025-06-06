@@ -1,13 +1,16 @@
 import { OrderItem } from "./Orderitem";
 import { DeliveryOption } from "../Deliver/DeliveryOption";
+import { Invoice } from "../Payment/Invoice";
 
 export class Order {
+  private invoiceList: Invoice[] = [];
   constructor(
     private id: number,
     private items: OrderItem[],
     private paymentStatus: string,
     private deliveryOption: DeliveryOption,
     private buyerName: string
+    
   ) {}
 
   getTotalPrice(): number {
@@ -35,6 +38,13 @@ export class Order {
   getDeliveryOption(): DeliveryOption {
     return this.deliveryOption;
   }
-  
+   addInvoice(invoice: Invoice): void {
+    this.invoiceList.push(invoice);
+  }
+
+  // Get all invoices
+  getInvoices(): Invoice[] {
+    return this.invoiceList;
+  }
 
 }
