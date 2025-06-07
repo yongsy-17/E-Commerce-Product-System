@@ -1,7 +1,10 @@
 import { OrderItem } from "./Orderitem";
 import { DeliveryOption } from "../Deliver/DeliveryOption";
+import { Invoice } from "../Payment/Invoice";
 
 export class Order {
+  private invoiceList: Invoice[] = [];
+
   constructor(
     private id: number,
     private items: OrderItem[],
@@ -29,11 +32,21 @@ export class Order {
   getBuyerName(): string {
     return this.buyerName;
   }
+
   getPaymentStatus(): string {
     return this.paymentStatus;
   }
+
   getDeliveryOption(): DeliveryOption {
     return this.deliveryOption;
+  }
+
+  addInvoice(invoice: Invoice): void {
+    this.invoiceList.push(invoice);
+  }
+
+  getInvoices(): Invoice[] {
+    return this.invoiceList;
   }
   cancelOrderItem(itemId: number): number | null {
     const itemIndex = this.items.findIndex(item => {
