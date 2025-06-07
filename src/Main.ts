@@ -7,6 +7,7 @@ import { DeliveryManager } from "./Deliver/DeliveryManager";
 import { DeliveryStatus, DeliveryType } from "./Deliver/DeliveryType";
 import { Categories } from "./Product/Categories";
 import { Seller } from "./Person/Seller";
+import { ShoppingCart } from "./Shopping/ShoppingCart";
 
 import { Review } from "./Person/Review";
 
@@ -123,3 +124,17 @@ function demonstrateReviewSystem(): void {
 }
 //user stroy 6======
   demonstrateReviewSystem();
+//user story 7
+// Create a customer cart
+const myCart = new ShoppingCart("Sokchea");
+
+// Add to cart
+myCart.addProduct(product1, 1);
+myCart.addProduct(product2, 3);
+
+// View cart
+myCart.viewCart();
+
+// Checkout
+const delivery = new DeliveryOption(DeliveryType.STANDARD, 3.99);
+const myOrder = myCart.checkout(delivery);
