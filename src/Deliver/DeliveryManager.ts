@@ -1,4 +1,5 @@
 import { Shipment } from "./Shipment";
+import { Seller } from "../Person/Seller";
 
 export class DeliveryManager {
   constructor(public id: number, public name: string) {}
@@ -9,4 +10,7 @@ export class DeliveryManager {
         Delivery Method: ${shipment.deliveryOption.type}
         Delivery Cost: ${shipment.deliveryOption.cost}`;
   }
+   viewSellerStock(sellers: Seller[ ]): void{
+    return 
+   }
 }
