@@ -135,10 +135,6 @@ console.log("Product that",customer.getName(),"canceled:", productStockArray);
 console.log(`Total price returned: $${product1.price + product2.price + product3.price}`);
 
 
-
-
-
-
 // user story 6
 function demonstrateReviewSystem(): void {
   const product = new Product(1, "Wireless Headphones",Categories.CLOSTHING,8,3,3,3,[]);
