@@ -2,21 +2,22 @@ export class Person {
   constructor(
     private id: number,
     private name: string,
-    private age: number,
+    private age: number
+  ) {}
 
-
-  ) {
-    this.id = id;
-    this.name = name;
-    this.age = age;
+  public getId(): number {
+    return this.id;
   }
+
   public getName(): string {
-        return this.name;
-    }
-  getId():number{
-    return this.id
+    return this.name;
   }
-  getAge():number{
-    return this.age
+
+  public getAge(): number {
+    return this.age;
+  }
+
+  public toString(): string {
+    return `Person[ID=${this.id}, Name=${this.name}, Age=${this.age}]`;
   }
 }

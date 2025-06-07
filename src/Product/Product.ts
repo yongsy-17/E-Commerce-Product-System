@@ -19,7 +19,9 @@ export class Product implements IProduct {
     getProduct(): string {
         return `${this.productName} - $${this.price.toFixed(2)} (${this.stockQuantity} in stock, ${this.discount}% off)`;
     }
-
+    getName(){
+      return this.productName
+    }
     getDiscountedPrice(): number {
         return parseFloat((this.price * (1 - this.discount / 100)).toFixed(2));
     }

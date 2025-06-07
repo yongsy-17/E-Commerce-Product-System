@@ -9,6 +9,8 @@ import { Categories } from "./Product/Categories";
 import { Seller } from "./Person/Seller";
 import { ShoppingCart } from "./Shopping/ShoppingCart";
 import { Invoice } from "./Payment/Invoice";
+import { OrderHistory } from "./Shopping/OrderHistory";
+import { Person } from "./Person/Person";
 
 import { Review } from "./Person/Review";
 import { User } from "./Person/User";
@@ -177,3 +179,15 @@ myOrder.getInvoices().forEach(inv => {
   console.log(inv.displayInvoice());
 });
 console.log(myOrder)
+
+
+const itemA = new OrderItem(3, "STANDARD", 1, product3);
+const newOrder = new Order(102, [itemA], "PAID", delivery, "Chantha");
+
+const person = new Person(1, "Yongsy Din", 20); 
+const history = new OrderHistory(newOrder, person);
+
+// Later update
+const admin = new Person(2, "Admin User", 30); 
+history.updateHistory(admin);
+console.log(history)
