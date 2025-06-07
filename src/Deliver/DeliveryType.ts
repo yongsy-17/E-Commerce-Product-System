@@ -3,9 +3,3 @@ export enum DeliveryType {
   EXPRESS = "Express",
   SAME_DAY = "Same Day"
 }
-export enum DeliveryStatus {
-  PENDING = "Pending", 
-  CoMPLETED = "Completed",
-  CANCELLED = "Cancelled",
-  DELIVERED = "DELIVERED"
-}
