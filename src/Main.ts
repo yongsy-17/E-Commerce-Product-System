@@ -1,16 +1,16 @@
-import { Product } from "./Product/Product";
-import { OrderItem } from "./Shopping/Orderitem";
+import { User } from "./Person/User";
+import { Seller } from "./Person/Seller";
+import { Review } from "./Person/Review";
 import { Order } from "./Shopping/Order";
+import { Product } from "./Product/Product";
 import { Shipment } from "./Deliver/Shipment";
+import { OrderItem } from "./Shopping/Orderitem";
+import { Categories } from "./Product/Categories";
+import { ShoppingCart } from "./Shopping/ShoppingCart";
 import { DeliveryOption } from "./Deliver/DeliveryOption";
 import { DeliveryManager } from "./Deliver/DeliveryManager";
 import { DeliveryStatus, DeliveryType } from "./Deliver/DeliveryType";
-import { Categories } from "./Product/Categories";
-import { Seller } from "./Person/Seller";
-import { ShoppingCart } from "./Shopping/ShoppingCart";
 
-import { Review } from "./Person/Review";
-import { User } from "./Person/User";
 
 
 // Create products
