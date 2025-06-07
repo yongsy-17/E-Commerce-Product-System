@@ -15,7 +15,6 @@ import { Review } from "./Person/Review";
 // Create products
 const tshirt = new Product(1, "T-shirt", Categories.CLOSTHING, 5, 2, 20, 1001, []);
 const cable = new Product(2, "USB Cable", Categories.ELECTRONICE, 3, 1, 15, 1001, []);
-console.log(tshirt,cable)
 
 // Create delivery option
 const expressOption = new DeliveryOption(DeliveryType.EXPRESS, 10);
