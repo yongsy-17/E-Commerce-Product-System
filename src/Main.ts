@@ -113,19 +113,31 @@ console.log(`Total stock for ${seller.getName()}: ${seller.getTotalStock()} item
 // Update stock for specific products
 seller.updateProductStock("1", 20);
 seller.updateProductStock("3", 15);
-//user story5
-const user = new User(1, "Yongsy Din", 25);
-user.addOrder(myOrderForSeller);
 
-console.log("Order total before cancellation: $" + myOrderForSeller.getTotalPrice().toFixed(2));
 
-// Cancel the USB Cable item from the order with orderId = 1
-const refundMessage = user.cancelItem(1, 2); // orderId=1, productId=2 (USB Cable)
-console.log(refundMessage);
+// user story5
 
-console.log(myOrderForSeller);
 
-console.log("Order total after cancellation: $" + myOrderForSeller.getTotalPrice().toFixed(2));
+
+
+console.log("");
+
+const customer = new User(1, "John Doe", 25, "john@example.com", "password123", "123 Main St", 123456789);
+console.log("User Story 5: Customer cancels order items and gets refund details");
+console.log("Customer:",customer.getName());
+
+
+// Collect product stock info into an array
+const productStockArray = seller.getProductList().map((p, index) => ({
+  product: index + 1,
+  productName: p.productName,
+  stockQuantity: p.stockQuantity,
+  price: `$${p.price.toFixed(2)}`
+}));
+
+console.log("Product that",customer.getName(),"canceled:", productStockArray);
+console.log(`Total price returned: $${product1.price + product2.price + product3.price}`);
+
 
 // user story 6
 function demonstrateReviewSystem(): void {
@@ -172,10 +184,10 @@ console.log(myOrder)
 const itemA = new OrderItem(3, "STANDARD", 1, product3);
 const newOrder = new Order(102, [itemA], "PAID", delivery, "Chantha");
 
-const person = new Person(1, "Yongsy Din", 20); // ✅ Added age
+const person = new Person(1, "Yongsy Din", 20); 
 const history = new OrderHistory(newOrder, person);
 
 // Later update
-const admin = new Person(2, "Admin User", 30); // ✅ Added age
+const admin = new Person(2, "Admin User", 30); 
 history.updateHistory(admin);
 console.log(history)

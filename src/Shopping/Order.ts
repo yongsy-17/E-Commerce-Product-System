@@ -48,30 +48,33 @@ export class Order {
   getInvoices(): Invoice[] {
     return this.invoiceList;
   }
-
-  // Cancel item by product ID
-  cancelItem(productId: number): number {
-    const index = this.items.findIndex(item => item.getProduct().id === productId);
-
-    if (index === -1) {
-      throw new Error("Product not found in the order.");
+  cancelOrderItem(itemId: number): number | null {
+    const itemIndex = this.items.findIndex(item => {
+      return (item as any).id === itemId;
+    }); 
+    if (itemIndex !== -1) {
+      const canceledItem = this.items[itemIndex];
+      this.items.splice(itemIndex, 1); 
+      return canceledItem.getTotalPrice(); 
     }
-
-    const item = this.items[index];
-    const product = item.getProduct();
-    const quantity = item.getQuantity();
-
-    // Restore product stock
-    product.stockQuantity += quantity;
-
-    // Calculate refund
-    const price = product.price;
-    const discount = product.discount;
-    const refundAmount = price * (1 - discount / 100) * quantity;
-
-    // Remove the item from the order
-    this.items.splice(index, 1);
-
-    return refundAmount;
+    
+    return null; 
   }
+  getOriginalTotal(): number {
+  // Calculate the original total price before any cancellations or discounts
+  let total = 0;
+  for (const item of this.items) {
+    const product = item.getProduct();
+    const price = product.price;
+    const quantity = item.getQuantity();
+    const discount = product.discount;
+    const discountedPrice = price * (1 - discount / 100);
+    total += discountedPrice * quantity;
+  }
+  total += this.deliveryOption.cost;
+  return total;
 }
+}
+  
+
+

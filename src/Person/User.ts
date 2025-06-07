@@ -1,28 +1,62 @@
 import { Person } from "./Person";
 import { Order } from "../Shopping/Order";
+import { OrderItem } from "../Shopping/Orderitem";
+import { Product } from "../Product/Product";
+
 export class User extends Person {
-  private orders: Order[] = [];
+  private userId: number;
+  private email: string;
+  private password: string;
+  private shippingAddress: string;
+  private phonenumber: number;
 
-  public addOrder(order: Order): void {
-    this.orders.push(order);
+  constructor(
+    userId: number,
+    name: string,
+    age: number,
+    email: string,
+    password: string,
+    shippingAddress: string,
+    phonenumber: number
+  ) {
+    super(userId, name, age);
+    this.userId = userId;
+    this.email = email;
+    this.password = password;
+    this.shippingAddress = shippingAddress;
+    this.phonenumber = phonenumber;
   }
 
-  public getOrders(): Order[] {
-    return this.orders;
+  getUserId(): number {
+    return this.userId;
   }
 
-  cancelItem(orderId: number, productId: number): string {
-    const order = this.orders.find(o => o.getId() === orderId);
-
-    if (!order) {
-      return "Order not found.";
-    }
-
-    try {
-      const refundAmount = order.cancelItem(productId);
-      return `Item canceled successfully. Refund: $${refundAmount.toFixed(2)}. Updated order total: $${order.getTotalPrice().toFixed(2)}`;
-    } catch (error: any) {
-      return `Cancel failed: ${error.message}`;
-    }
+  getEmail(): string {
+    return this.email;
   }
+
+  getPassword(): string {
+    return this.password;
+  }
+
+  getShippingAddress(): string {
+    return this.shippingAddress;
+  }
+
+  getPhonenumber(): number {
+    return this.phonenumber;
+  }
+
+  createOrder(orderId: number, items: OrderItem[], paymentStatus: string, deliveryOption: any, buyerName: string): Order {
+    return new Order(orderId, items, paymentStatus, deliveryOption, buyerName);
+  }
+
+  cancelItem(order: Order, productId: number): void {
+    order.cancelOrderItem(productId);
+  }
+
+  leaveReview(product: Product, rating: number, comment: string): void {
+    product.addReview(rating, comment, this.getName());
+  }
+  
 }
