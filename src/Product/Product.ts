@@ -15,7 +15,6 @@ export class Product implements IProduct {
         private reviews: IReview[]
     ) {}
 
-    // Returns a summary of the product
     getProduct(): string {
         return `${this.productName} - $${this.price.toFixed(2)} (${this.stockQuantity} in stock, ${this.discount}% off)`;
     }

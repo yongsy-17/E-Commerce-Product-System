@@ -59,7 +59,6 @@ const product3 = new Product(3, "Laptop Stand", Categories.ELECTRONICE, 29.99, 5
 seller.addProduct(product1);
 seller.addProduct(product2);
 seller.addProduct(product3);
-console.log(product1)
 
 // Get seller orders from all customer orders
 const sokhaOrders = seller.getOrdersWithMyProducts([myOrderForSeller]);
