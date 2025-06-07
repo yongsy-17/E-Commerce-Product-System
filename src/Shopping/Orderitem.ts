@@ -37,10 +37,17 @@ export class OrderItem {
     return this.product;
   }
 
-  public getTotalPrice(): number {
-    const discountedPrice = this.product.price * (1 - this.product.discount / 100);
-    return discountedPrice * this.quantity;
-  }
+  // public getTotalPrice(): number {
+  //   const discountedPrice = this.product.price * (1 - this.product.discount / 100);
+  //   return discountedPrice * this.quantity;
+  // }
+  getTotalPrice(): number {
+  const product = this.getProduct();
+  const price = product.price;
+  const discount = product.discount;
+  const discountedPrice = price * (1 - discount / 100);
+  return discountedPrice * this.getQuantity();
+}
 
   // New method to show product name and stock quantity
   public getProductStockInfo(): string {
